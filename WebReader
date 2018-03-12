@@ -1,0 +1,36 @@
+//This program reads data from a website and writes it to a file.
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URL;
+import java.util.Scanner;
+
+public class WebReader {
+ public static void main(String[] args) throws IOException {
+  Scanner keyboard = new Scanner(System.in);
+  Scanner keyboard3 = new Scanner(System.in);
+
+  // put together web url from user input
+  System.out.print("Enter webpage URL: ");
+  String url = keyboard.nextLine();
+  url = "http://" + url;
+
+  URL pageLocation = new URL(url);
+  Scanner keyboard2 = new Scanner(pageLocation.openStream());
+
+  System.out.print("Enter output file name: ");
+
+  // create output file
+  String outputFile = keyboard3.nextLine();
+  File newFile = new File(outputFile);
+  PrintWriter out = new PrintWriter(newFile);
+
+  // write data from website to output file
+  while (keyboard2.hasNextLine()) {
+   String s = keyboard2.nextLine();
+   out.println(s);
+  }
+  out.close();
+ }
+}
